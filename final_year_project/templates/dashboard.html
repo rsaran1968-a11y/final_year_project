@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ app_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">BE</div>
+          <div>
+            <p class="brand-title">Bus Entry Exit</p>
+            <p class="brand-subtitle">{{ environment }}</p>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="Dashboard sections">
+          <a class="nav-link active nav-overview" href="#overview"><span></span>Overview</a>
+          <a class="nav-link nav-cameras" href="#cameras"><span></span>Cameras</a>
+          <a class="nav-link nav-events" href="#events"><span></span>Events</a>
+          <a class="nav-link nav-analytics" href="#analytics"><span></span>Analytics</a>
+          <a class="nav-link nav-modules" href="#modules"><span></span>Modules</a>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <section class="owner-banner" aria-label="Project owners">
+          <div>
+            <span>Project Owner</span>
+            <h2>Saran (43140029) & Harish Ragavan (43140046)</h2>
+          </div>
+        </section>
+
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Operations Control</p>
+            <h1>{{ app_name }}</h1>
+            <p class="page-subtitle">Live readiness view for entry, exit, camera, detection, OCR, and storage workflows.</p>
+            <div class="owner-block" aria-label="Project owners">
+              <span>Project Owner</span>
+              <strong>Saran (43140029)</strong>
+              <strong>Harish Ragavan (43140046)</strong>
+            </div>
+          </div>
+          <div class="topbar-actions">
+            <span class="status-pill" id="systemStatus">Loading</span>
+            <button class="refresh-button" id="refreshButton" type="button">Refresh</button>
+          </div>
+        </header>
+
+        <section class="color-strip" aria-label="System stages">
+          <div class="strip-item strip-camera">
+            <span>Camera</span>
+            <strong>Source</strong>
+          </div>
+          <div class="strip-item strip-detect">
+            <span>Detection</span>
+            <strong>Model</strong>
+          </div>
+          <div class="strip-item strip-ocr">
+            <span>OCR</span>
+            <strong>Plate Read</strong>
+          </div>
+          <div class="strip-item strip-cloud">
+            <span>Cloud</span>
+            <strong>Storage</strong>
+          </div>
+        </section>
+
+        <section class="alert-band" id="alerts" aria-live="polite"></section>
+        <section class="metric-grid" id="overview" aria-label="System metrics"></section>
+
+        <section class="layout-grid">
+          <div class="panel camera-panel" id="cameras">
+            <div class="panel-header">
+              <div>
+                <h2>Camera Network</h2>
+                <p>Current stream readiness and frame processing status.</p>
+              </div>
+              <span class="panel-tag">Live model</span>
+            </div>
+            <div class="camera-grid" id="cameraGrid"></div>
+          </div>
+
+          <div class="panel" id="events">
+            <div class="panel-header">
+              <div>
+                <h2>Event Stream</h2>
+                <p>Most recent entry, exit, system, and review events.</p>
+              </div>
+              <span class="panel-tag">Recent</span>
+            </div>
+            <div class="event-list" id="eventList"></div>
+          </div>
+        </section>
+
+        <section class="layout-grid">
+          <div class="panel" id="analytics">
+            <div class="panel-header">
+              <div>
+                <h2>Hourly Flow</h2>
+                <p>Entry and exit movement by operating hour.</p>
+              </div>
+              <span class="panel-tag">Today</span>
+            </div>
+            <div class="flow-chart" id="flowChart"></div>
+          </div>
+
+          <div class="panel occupancy-panel">
+            <div class="panel-header">
+              <div>
+                <h2>Yard Occupancy</h2>
+                <p>Net buses currently inside based on tracked movement.</p>
+              </div>
+              <span class="panel-tag">Computed</span>
+            </div>
+            <div class="occupancy-value" id="occupancyValue">0</div>
+            <div class="occupancy-caption">entries minus exits</div>
+          </div>
+        </section>
+
+        <section class="panel" id="modules">
+          <div class="panel-header">
+            <div>
+              <h2>Module Readiness</h2>
+              <p>Implementation status across the Clean Architecture boundaries.</p>
+            </div>
+            <span class="panel-tag">Roadmap</span>
+          </div>
+          <div class="module-grid" id="moduleGrid"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+  </body>
+</html>
